@@ -1,0 +1,256 @@
+:root {
+    --primary-custom: #1E293B;
+    /* Azul Marino / Slate Oscuro */
+    --accent-custom: #2563EB;
+    /* Azul Real de Acento */
+    --secondary-custom: #38BDF8;
+    /* Cyan Suave */
+    --bg-body-custom: #F8FAFC;
+    /* Gris Claro Azulado Limpio */
+    --white-custom: #FFFFFF;
+    --border-custom: #E2E8F0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Evitar el desbordamiento horizontal en toda la ventana */
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Permitir que el panel principal derecho se adapte al ancho de la pantalla */
+#wrapper>div {
+    min-width: 0;
+}
+
+body {
+    background-color: var(--bg-body-custom);
+    color: #334155;
+}
+
+/* Forzar ícono y texto en la misma línea dentro del sidebar */
+aside .nav-link {
+    display: flex !important;
+    align-items: center;
+    white-space: nowrap;
+    /* Evita que el texto salte a una segunda línea */
+    gap: 10px;
+    /* Controla la distancia exacta entre el ícono y el texto */
+}
+
+/* Previene que el ícono cambie de tamaño si el texto es largo */
+aside .nav-link i {
+    flex-shrink: 0;
+}
+
+/* Tarjetas refinadas */
+.custom-card {
+    background: var(--white-custom);
+    border: 1px solid var(--border-custom);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado reducido y profesional */
+.brand-header {
+    background: var(--primary-custom);
+    color: #ffffff;
+    padding: 12px 0;
+    margin-bottom: 24px;
+}
+
+/* Título superior de la marca */
+.brand-header {
+    background: linear-gradient(135deg, var(--primary-custom), var(--accent-custom));
+    color: #fff;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(60, 64, 68, 0.2);
+}
+
+/* Tarjetas de contenedor */
+.custom-card {
+    background: var(--white-custom);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(60, 64, 68, 0.08);
+    padding: 24px;
+    margin-bottom: 35px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-card:hover {
+    box-shadow: 0 6px 15px rgba(253, 123, 65, 0.15);
+}
+
+/* Títulos H3 de sección */
+h3.section-title {
+    color: var(--primary-custom);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 8px;
+}
+
+h3.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 24px;
+    background-color: var(--accent-custom);
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+h6 {
+    color: var(--accent-custom);
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Inputs y Selects */
+.form-label-custom {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-custom);
+    margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #b3b3b3;
+    border-radius: 6px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent-custom);
+    box-shadow: 0 0 0 0.25rem rgba(253, 123, 65, 0.25);
+}
+
+/* Pestañas (Tabs) Estilizadas */
+.nav-tabs {
+    border-bottom: 2px solid #ccc;
+}
+
+.nav-tabs .nav-link {
+    color: var(--primary-custom);
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    margin-right: 4px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: var(--primary-custom);
+    border: none;
+}
+
+.tab-container-custom {
+    background: var(--white-custom);
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 35px;
+}
+
+/* Tablas */
+.table-responsive-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background: white;
+    margin-top: 15px;
+}
+
+.table thead th {
+    background-color: var(--primary-custom) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-custom) !important;
+}
+
+.table th {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 8px;
+    vertical-align: middle;
+}
+
+.table td {
+    padding: 4px !important;
+    vertical-align: middle;
+}
+
+/* Inputs ultra compactos en tablas */
+.form-control-xs {
+    height: 26px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-control-xs:focus {
+    border-color: var(--accent-custom);
+}
+
+.row-spacing>[class*="col-"] {
+    margin-bottom: 12px;
+}
+
+td>button {
+    min-width: 28px;
+}
+
+/* Botón cerrar pestañas */
+.btn-delete-tab {
+    transition: all 0.2s ease;
+    color: var(--primary-custom);
+}
+
+.btn-delete-tab:hover,
+.nav-link.active .btn-delete-tab {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border-color: #dc3545 !important;
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--accent-custom);
+    color: #ffffff;
+}
+
+.btn-primary-custom {
+    background-color: var(--accent-custom);
+    color: #ffffff;
+    border: none;
+    transition: all 0.2s ease;
+    margin-top: 27px;
+}
+
+.btn-primary-custom:hover {
+    background-color: #e0632e;
+    color: #ffffff;
+}
+
+.bg-light-custom {
+    background-color: #e8e7e6 !important;
+}

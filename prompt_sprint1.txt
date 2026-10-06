@@ -1,0 +1,17 @@
+OBJETIVO: Configurar la conexión a PostgreSQL y los modelos ORM en el directorio 'backend/'.
+
+REQUISITOS TÉCNICOS:
+1. Crear/actualizar la configuración de conexión en 'backend/config.py' o 'backend/database.py' usando SQLAlchemy y la cadena:
+   postgresql://pas_owner:29/t(f8Q$c9C@127.0.0.1:5432/pas_data
+
+2. Crear en 'backend/models/' las clases ORM mapeadas contra las tablas ya existentes en PostgreSQL:
+   - PartidaArancelaria (tabla: partida_arancelaria) -> campos: partida_arancelaria (PK), descripcion, dai, isc, iva, rir, unidad
+   - Tratados (tabla: tratados) -> campos: partida_arancelaria (PK), dai, tlc_mex, tlc_rdo, cafta, cafta_rd, panama, tlc_chi, ue_ca, daicuba, ecuador, corea, tlc_gb, china
+   - Regimen (tabla: regimen)
+   - SubRegimen (tabla: sub_regimen) con relación ForeignKey a Regimen
+   - Almacen (tabla: almacen)
+   - Adicionalmente, el resto de catálogos base (pais, aduana, unidad_medida, incoterm, moneda_transaccion, etc.)
+
+3. Asegurar que las clases usen 'automap' o declaración explícita de SQLAlchemy sin intentar recrear las tablas en la BD (use_existing=True / extend_existing=True).
+
+4. Crear un script de prueba 'backend/test_db_connection.py' que realice un SELECT de prueba sobre 'partida_arancelaria' y 'tratados' e imprima el conteo de registros en consola para validar.

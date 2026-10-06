@@ -1,0 +1,17 @@
+OBJETIVO: Configurar el control de versiones con Git, generar archivos de configuración del proyecto y subir los cambios al repositorio.
+
+REQUISITOS TÉCNICOS:
+
+1. ARCHIVO .gitignore ('~/aforo/.gitignore'):
+   - Excluir entorno virtual (venv/, .venv/), archivos compilados (__pycache__/, *.pyc), base de datos o backups (*.sql, *.xlsx), variables de entorno (.env), y carpetas de configuración IDE (.vscode/, .idea/).
+
+2. PLANTILLA DE VARIABLES DE ENTORNO ('backend/.env.example'):
+   - Incluir plantilla con variables de conexión (DATABASE_URL, HOST, PORT) sin exponer credenciales sensibles.
+
+3. INICIALIZACIÓN Y COMMIT EN GIT:
+   - Inicializar el repositorio Git en '~/aforo/' (si no está inicializado).
+   - Crear el commit inicial agrupando las mejoras del backend usando formato Conventional Commits:
+     "feat(backend): implementa API FastAPI con ORM SQLAlchemy y motor de liquidacion tributaria"
+
+4. VALIDACIÓN DE ESTADO:
+   - Ejecutar 'git status' y 'git log -1' para verificar el registro del commit.

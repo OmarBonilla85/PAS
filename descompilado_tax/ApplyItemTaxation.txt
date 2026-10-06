@@ -1,0 +1,18 @@
+Compiled from "ApplyItemTaxation.java"
+public class un.asytax.taxation.ApplyItemTaxation implements un.asytax.taxation.C_Tax,un.kernel.util.RuleSyntaxClasses {
+  private java.util.ArrayList tokenList;
+  private so.kernel.core.DataSet doc;
+  private so.kernel.core.KNumberedSubDataSet itm_tax_rules;
+  private final java.lang.String location;
+  private un.kernel.util.dynamicparser.RuleParser ruleParser;
+  public un.asytax.taxation.ApplyItemTaxation(so.kernel.core.DataSet, java.lang.String);
+  public void getItemConfigRules(un.kernel.core.ArefHTCompatible);
+  public void processTaxation(so.kernel.core.DataSet, un.asytax.taxation.TaxationParserInterface, un.kernel.core.ArefHTCompatible);
+  private void getUNMKTTABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  private void getUNCTYTABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  private void getUNPRFTABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  private void getUNCP3TABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  private void getUNAGRTABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  private void getUNTARTABReferenceRule(so.kernel.core.DataSet, so.kernel.core.DataSet, so.kernel.core.KNumberedSubDataSet, un.kernel.core.ArefHTCompatible);
+  public so.kernel.core.DataSet returnDocument();
+}

@@ -1,0 +1,36 @@
+OBJETIVO: Instalar dependencias web, crear esquemas Pydantic y construir los endpoints de la API REST en FastAPI dentro del directorio 'backend/'.
+
+REQUISITOS TÉCNICOS:
+
+1. INSTALACIÓN DE DEPENDENCIAS:
+   Asegurar que estén instalados en el entorno activo los paquetes: fastapi, uvicorn, pydantic, python-dotenv, pandas.
+
+2. ESQUEMAS PYDANTIC ('backend/schemas/'):
+   - 'arancel.py':
+     * PartidaArancelariaResponse: schema para respuesta con campos partida_arancelaria, descripcion, dai, isc, iva, rir, unidad.
+     * TratadosResponse: schema para tratado de una partida.
+   - 'catalogos.py':
+     * Schemas base para respuesta de catálogos (RegimenResponse, SubRegimenResponse, AlmacenResponse, etc.).
+
+3. RUTAS / ENDPOINTS DE LA API ('backend/routers/'):
+   - 'arancel.py':
+     * GET /api/v1/arancel/partida/{codigo} -> Devuelve el detalle tributario de una partida específica.
+     * GET /api/v1/arancel/buscar?q={texto_o_codigo}&limit=20 -> Búsqueda por coincidencia de código o descripción.
+     * GET /api/v1/arancel/tratados/{partida} -> Devuelve las alícuotas preferenciales de TLC para esa partida.
+   - 'catalogos.py':
+     * GET /api/v1/catalogos/regimenes -> Lista de regímenes y sus sub-regímenes relacionados.
+     * GET /api/v1/catalogos/almacenes -> Lista de almacenes/recintos.
+     * GET /api/v1/catalogos/{nombre_catalogo} -> Endpoint genérico para consultar catálogos simples (pais, aduana, incoterm, etc.).
+
+4. APLICACIÓN PRINCIPAL ('backend/main.py'):
+   - Instanciar FastAPI(title="PAS - Programa Aduanero Sistematizado API", version="1.0.0").
+   - Configurar CORS (allow_origins=["*"]).
+   - Incluir los routers de arancel y catálogos con prefijos '/api/v1'.
+   - Endpoint raíz GET '/' -> Devuelve {"status": "online", "app": "PAS API"}.
+
+5. SCRIPT DE PRUEBA ('backend/test_api.py'):
+   - Script que use fastapi.testclient.TestClient para probar los endpoints:
+     * GET /api/v1/arancel/partida/0101210000000
+     * GET /api/v1/arancel/buscar?q=REPRODUCTORES
+     * GET /api/v1/catalogos/regimenes
+   - Imprimir resultados esperados en consola para validar funcionamiento.

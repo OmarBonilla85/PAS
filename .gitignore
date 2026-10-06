@@ -1,0 +1,24 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Base de datos y backups
+*.sql
+*.xlsx
+
+# Variables de entorno (credenciales reales)
+.env
+
+# Configuración de IDE
+.vscode/
+.idea/
+
+# Estado interno del agente de desarrollo
+.codewhale/

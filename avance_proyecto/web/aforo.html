@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap opcionales para darle aún más vida -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>PAS - Programa Aduanero Sistematizado</title>
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <!-- 1. BARRA LATERAL DE NAVEGACIÓN (SIDEBAR) -->
+        <aside class="bg-dark text-white p-3 position-fixed top-0 start-0 vh-100"
+            style="width: 260px; height: 100vh; z-index: 1000;">
+            <h5 class="fw-bold mb-4"><i class="bi bi-shield-check"></i> PAS Aduanas</h5>
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link active text-white mb-2" href="#sec-aduana"><i class="bi bi-building"></i> Aduana</a>
+                <a class="nav-link text-white mb-2" href="#sec-logistica"><i class="bi bi-truck"></i> Logística</a>
+                <a class="nav-link text-white mb-2" href="#sec-transporte"><i class="bi bi-globe"></i> Transporte</a>
+                <a class="nav-link text-white mb-2" href="#sec-dva"><i class="bi bi-file-earmark-text"></i> DVA</a>
+                <a class="nav-link text-white mb-2" href="#sec-facturas"><i class="bi bi-receipt"></i> Facturas</a>
+                <a class="nav-link text-white mb-2" href="#sec-articulos"><i class="bi bi-box-seam"></i> Artículos</a>
+                <a class="nav-link text-white mb-2" href="#sec-documentos"><i class="bi bi-folder2-open"></i>
+                    Documentos</a>
+                <a class="nav-link text-white mb-2" href="#sec-observaciones"><i class="bi bi-card-list"></i>
+                    Observaciones</a>
+            </div>
+        </aside>
+
+        <div class="flex-grow-1 d-flex flex-column min-vh-100 overflow-hidden" style="margin-left: 260px;">
+
+            <header class="brand-header text-center">
+                <h1 class="h3 mb-0 fw-bold"><i class="bi bi-shield-check"></i> PAS — Pedimentación Aduanera
+                    Sistematizada
+                </h1>
+                <small class="opacity-75">Módulo de Gestión e Integración Logística de Mercancías</small>
+            </header>
+
+            <!-- 2. CONTENIDO PRINCIPAL -->
+            <main class="flex-grow-1 p-4 mb-5">
+
+                <!-- SECCIÓN 1: ADUANA -->
+                <section class="container" id="sec-aduana">
+                    <h3 class="section-title">Aduana</h3>
+                    <div class="custom-card">
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Ingreso</label>
+                                <input type="text" name="ingreso" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Despacho</label>
+                                <input type="text" name="despacho" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Referencia</label>
+                                <input type="text" name="referencia" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Patrón</label>
+                                <input type="text" name="patron" class="form-control" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2: LOGÍSTICA DE MERCANCÍA -->
+                <section class="container" id="sec-logistica">
+                    <h3 class="section-title">Logística de Mercancía</h3>
+                    <div class="custom-card">
+                        <h6><i class="bi bi-truck"></i> Modo de transporte</h6>
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <label class="form-label-custom">A la frontera</label>
+                                <input type="text" name="a_la_frontera" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Interno</label>
+                                <input type="text" name="interno" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Lugar de descargue</label>
+                                <input type="text" name="lugar_de_descargue" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Localizacion de la mercancía</label>
+                                <input type="text" name="localizacion_de_la_mercancia" class="form-control"
+                                    autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Almacen</label>
+                                <input type="text" name="almacen" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-custom">Plazo (en días)</label>
+                                <input type="text" name="plazo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: DATOS DEL MEDIO DE TRANSPORTE -->
+                <section class="container" id="sec-transporte">
+                    <h3 class="section-title">Datos del medio de transporte</h3>
+                    <div class="custom-card">
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-globe"></i> Registro y nacionalidad del medio</h6>
+                                <div class="row row-spacing align-items-end">
+                                    <div class=" col-md-7">
+                                        <label class="form-label-custom">Código del transportista</label>
+                                        <input type="text" name="codigo_del_transportista" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">País del transportista</label>
+                                        <input type="text" name="pais_del_transportista" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-1 text-center mb-2">
+                                        <div class="form-check d-inline-block">
+                                            <input type="checkbox" name="contenedor" class="form-check-input"
+                                                title="¿Contenedor?">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-7">
+                                        <label class="form-label-custom">Identificación de la unidad de
+                                            transporte</label>
+                                        <input type="text" name="cabezal_del_medio" class="form-control">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label-custom">País del medio</label>
+                                        <input type="text" name="pais_del_medio" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="bi bi-person-badge"></i> Datos complementarios del medio</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Nombre del conductor</label>
+                                        <input type="text" name="nombre_del_conductor" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Licencia del conductor</label>
+                                        <input type="text" name="licencia_del_conductor" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Identificación de la rastra</label>
+                                        <input type="text" name="rastra_del_medio" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Documento de identificación</label>
+                                        <input type="text" name="documento_de_identificacion" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4: DECLARACIÓN DEL VALOR EN ADUANA -->
+                <section class="container" id="sec-dva">
+                    <h3 class="section-title">Declaración del valor en aduana</h3>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#dva">DVA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#intermediario">Intermediario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#condiciones">Condiciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#conformacion">Conformación</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content tab-container-custom">
+                        <div id="dva" class="tab-pane fade show active">
+                            <ul id="nav-tabs-dva" class="nav nav-pills mb-3" role="tablist">
+                                <li class="nav-item" role="presentation" style="display: none;">
+                                    <a class="nav-link py-1 px-3 active" data-bs-toggle="pill" role="tab"
+                                        href="#proveedor">
+                                        <span>Proveedor</span>
+                                        <button class="btn btn-light btn-sm btn-delete-tab">X</button>
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link py-1 px-3 active" data-bs-toggle="pill" role="tab"
+                                        href="#proveedor_nPpc5ifAcm">
+                                        <span>Proveedor</span>
+                                        <button class="btn btn-light btn-sm btn-delete-tab">X</button>
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link py-1 px-3 bg-light text-dark ms-2" data-bs-toggle="pill"
+                                        role="tab" href="#adicionar">
+                                        <button class="btn btn-light btn-sm">+</button>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="proveedor_contenedor" class="border rounded p-3 bg-light-custom tab-content">
+                                <div id="contenedor" style="display: none;">
+                                    <div id="proveedor" class="tab-pane fade show active" role="tabpanel">
+                                        <div class="row row-spacing">
+                                            <div class="col-md-12">
+                                                <label class="form-label-custom">Proveedor</label>
+                                                <input type="text" name="proveedor" class="form-control"
+                                                    autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="row row-spacing">
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-8">
+                                                        <label class="form-label-custom">Lugar de entrega</label>
+                                                        <input type="text" name="lugar_de_entrega" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">País de entrega</label>
+                                                        <input type="text" name="pais_de_entrega" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-8">
+                                                        <label class="form-label-custom">Lugar de embarque</label>
+                                                        <input type="text" name="lugar_de_embarque"
+                                                            class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">País de embarque</label>
+                                                        <input type="text" name="pais_de_embarque" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-spacing">
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-12">
+                                                        <label class="form-label-custom">Incoterm</label>
+                                                        <input type="text" name="incoterm" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label-custom">País de exportación</label>
+                                                        <input type="text" name="pais_de_exportacion"
+                                                            class="form-control" autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label-custom">Fecha de exportación</label>
+                                                        <input type="date" name="fecha_de_exportacion"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-spacing">
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label-custom">País de origen</label>
+                                                        <input type="text" name="pais_de_origen" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label-custom">País de destino</label>
+                                                        <input type="text" name="pais_de_destino" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">Forma de envío</label>
+                                                        <input type="text" name="forma_de_envio" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label class="form-label-custom">Otra forma de envío
+                                                            (especificar)</label>
+                                                        <input type="text" name="otra_forma_de_envio"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row row-spacing">
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">Estado del pago</label>
+                                                        <input type="text" name="estado_del_pago" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">Forma de pago</label>
+                                                        <input type="text" name="forma_de_pago" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">Otra forma de pago</label>
+                                                        <input type="text" name="otra_forma_de_pago"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row row-spacing">
+                                                    <div class="col-md-5">
+                                                        <label class="form-label-custom">Moneda de transacción</label>
+                                                        <input type="text" name="moneda_de_transaccion"
+                                                            class="form-control" autocomplete="off">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label-custom">Tipo de cambio</label>
+                                                        <input type="text" name="tipo_de_cambio" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <br>
+                                                        <input type="radio" name="operacion" class="form-check-input">
+                                                        <label class="form-label-custom">Multiplicar</label>
+                                                        <br>
+                                                        <input type="radio" name="operacion" class="form-check-input">
+                                                        <label class="form-label-custom">Dividir</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="proveedor_nPpc5ifAcm" class="tab-pane fade show active" role="tabpanel">
+                                    <div class="row row-spacing">
+                                        <div class="col-md-12">
+                                            <label class="form-label-custom">Proveedor</label>
+                                            <input type="text" name="proveedor" class="form-control" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="row row-spacing">
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-8">
+                                                    <label class="form-label-custom">Lugar de entrega</label>
+                                                    <input type="text" name="lugar_de_entrega" class="form-control">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">País de entrega</label>
+                                                    <input type="text" name="pais_de_entrega" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-8">
+                                                    <label class="form-label-custom">Lugar de embarque</label>
+                                                    <input type="text" name="lugar_de_embarque" class="form-control">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">País de embarque</label>
+                                                    <input type="text" name="pais_de_embarque" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-spacing">
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-12">
+                                                    <label class="form-label-custom">Incoterm</label>
+                                                    <input type="text" name="incoterm" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-6">
+                                                    <label class="form-label-custom">País de exportación</label>
+                                                    <input type="text" name="pais_de_exportacion" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label-custom">Fecha de exportación</label>
+                                                    <input type="date" name="fecha_de_exportacion" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-spacing">
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-6">
+                                                    <label class="form-label-custom">País de origen</label>
+                                                    <input type="text" name="pais_de_origen" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label-custom">País de destino</label>
+                                                    <input type="text" name="pais_de_destino" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">Forma de envío</label>
+                                                    <input type="text" name="forma_de_envio" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="form-label-custom">Otra forma de envío
+                                                        (especificar)</label>
+                                                    <input type="text" name="otra_forma_de_envio" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-spacing">
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">Estado del pago</label>
+                                                    <input type="text" name="estado_del_pago" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">Forma de pago</label>
+                                                    <input type="text" name="forma_de_pago" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">Otra forma de pago</label>
+                                                    <input type="text" name="otra_forma_de_pago" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row row-spacing">
+                                                <div class="col-md-5">
+                                                    <label class="form-label-custom">Moneda de transacción</label>
+                                                    <input type="text" name="moneda_de_transaccion" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label-custom">Tipo de cambio</label>
+                                                    <input type="text" name="tipo_de_cambio" class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <br>
+                                                    <input type="radio" name="operacion" class="form-check-input">
+                                                    <label class="form-label-custom">Multiplicar</label>
+                                                    <br>
+                                                    <input type="radio" name="operacion" class="form-check-input">
+                                                    <label class="form-label-custom">Dividir</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="intermediario" class="tab-pane fade">
+                            <div intermediario="proveedor" style="display: none;">
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Nombre o razón social</label>
+                                        <input type="text" name="nombre_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Domicilio</label>
+                                        <input type="text" name="domicilio_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Ciudad</label>
+                                        <input type="text" name="ciudad_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">País</label>
+                                        <input type="text" name="pais_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Teléfono</label>
+                                        <input type="text" name="telefono_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Fax</label>
+                                        <input type="text" name="fax_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Email</label>
+                                        <input type="text" name="email_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row row-spacing">
+                                            <div class="col-md-4">
+                                                <label class="form-label-custom">Tipo de intermediario</label>
+                                                <input type="text" name="tipo_de_intermediario" class="form-control"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="form-label-custom">Otro (especificar)</label>
+                                                <input type="text" name="otro_tipo_intermediario" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div intermediario="proveedor_nPpc5ifAcm">
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Nombre o razón social</label>
+                                        <input type="text" name="nombre_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Domicilio</label>
+                                        <input type="text" name="domicilio_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Ciudad</label>
+                                        <input type="text" name="ciudad_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">País</label>
+                                        <input type="text" name="pais_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Teléfono</label>
+                                        <input type="text" name="telefono_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Fax</label>
+                                        <input type="text" name="fax_intermediario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-6">
+                                        <label class="form-label-custom">Email</label>
+                                        <input type="text" name="email_intermediario" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row row-spacing">
+                                            <div class="col-md-4">
+                                                <label class="form-label-custom">Tipo de intermediario</label>
+                                                <input type="text" name="tipo_de_intermediario" class="form-control"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="form-label-custom">Otro (especificar)</label>
+                                                <input type="text" name="otro_tipo_intermediario" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="condiciones" class="tab-pane fade">
+                            <div condiciones="proveedor" style="display: none;">
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen restricciones para la cesión de la mercancías por el comprador,
+                                            distintas
+                                            a
+                                            las
+                                            excepciones previstas en el arto. 1.1 a), del acuerdo:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="restriccion_cesion_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso de existir, indicar en que consiste la o las restricciones:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="indicar_restricciones_condiciones"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Depende la venta o el precio de alguna condición o contraprestación, con
+                                            relación
+                                            a
+                                            las
+                                            mercancías a valorar:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="precio_mercancias_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo indicar en que consiste la condición o contraprestación:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="indicar_relacion_precio_condiciones"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Está la venta condicionada a revertir directa o indirectamente al vendedor
+                                            parte
+                                            alguna
+                                            el producto de lareventa o de cualquier cesión o utilización posterior de
+                                            las
+                                            mercancías, por el comprador. En caso afirmativo, declarar el monto de la
+                                            reversión:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="reversion_monto_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existe vínculo entre el importador y el exportador:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="vinculo_condiciones" class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar que tipo de vinculación:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="vinculo_condiciones" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Indicar si la vinculacion ha influido en el precio:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="influencia_precio_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen pagos indirectos y/o descuentos retroactivos:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="pagos_indirectos_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar en que concepto y el monto declararlo:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="concepto_precio_condiciones" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen cánones y derecho de licencias que el comprador tenga que pagar
+                                            directa o
+                                            indirectamente:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="canones_condiciones" class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar su naturaleza y el monto declararlo:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="naturaleza_condiciones" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div condiciones="proveedor_nPpc5ifAcm">
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen restricciones para la cesión de la mercancías por el comprador,
+                                            distintas
+                                            a
+                                            las
+                                            excepciones previstas en el arto. 1.1 a), del acuerdo:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="restriccion_cesion_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso de existir, indicar en que consiste la o las restricciones:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="indicar_restricciones_condiciones"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Depende la venta o el precio de alguna condición o contraprestación, con
+                                            relación
+                                            a
+                                            las
+                                            mercancías a valorar:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="precio_mercancias_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo indicar en que consiste la condición o contraprestación:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="indicar_relacion_precio_condiciones"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Está la venta condicionada a revertir directa o indirectamente al vendedor
+                                            parte
+                                            alguna
+                                            el producto de lareventa o de cualquier cesión o utilización posterior de
+                                            las
+                                            mercancías, por el comprador. En caso afirmativo, declarar el monto de la
+                                            reversión:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="reversion_monto_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existe vínculo entre el importador y el exportador:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="vinculo_condiciones" class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar que tipo de vinculación:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="vinculo_condiciones" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Indicar si la vinculacion ha influido en el precio:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="influencia_precio_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen pagos indirectos y/o descuentos retroactivos:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="pagos_indirectos_condiciones"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar en que concepto y el monto declararlo:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="concepto_precio_condiciones" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-11">
+                                        <p>Existen cánones y derecho de licencias que el comprador tenga que pagar
+                                            directa o
+                                            indirectamente:</p>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="canones_condiciones" class="form-check-input">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <p>En caso afirmativo, indicar su naturaleza y el monto declararlo:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="naturaleza_condiciones" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="conformacion" class="tab-pane fade">
+                            <div conformacion="proveedor" style="display: none;">
+                                <h6>A. Base de cálculo</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Precio según factura:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="precio_factura_conformacion" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Pagos indirectos y/o descuentos, retroactivos:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="pagos_indirectos_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <h6>B. Adiciones al precio realmente pagado o por pagar</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Monto de la condición o contraprestación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="monto_condicion_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos por comisiones o corretajes, salvo los de comisiones de compras:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="gastos_comisiones_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos y costos de envases y embalajes:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="gastos_envases_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los materiales, piezas y elementos, partes y artículos analizados
+                                            incorporados:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_materiales_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de las herramientas, matrices, moldes y elementos analizados necesarios
+                                            para la
+                                            producción:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_herramientas_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los materiales consumidos en la producción de las mercancias
+                                            importadas:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_materiales_consumidos_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de ingeniería, creación y perfeccionamiento, trabajos artísticos,
+                                            diseños,
+                                            planos y
+                                            croquis realizados fuera del país de importación y necesarios para la
+                                            producción:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_ingenieria_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los cánones y derechos de licencias:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_canones_licencias_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de transporte de las mercancías importadas hasta el puerto o lugar de
+                                            importación:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_transporte_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de cargas, descarga y manipulación ocasionadas por el transporte de
+                                            las
+                                            mercancías
+                                            importadas hasta el puerto o lugar de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_cargas_descarga_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Seguro:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_seguro_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <h6>C. Deducciones: Importes incluidos en A</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de contrucción, armado, montaje, mantenimiento o asistencia técnica
+                                            realizados
+                                            después de la importación, en relación a las mercancias importadas:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_construccion_posterior_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Costos del transporte posterior al puerto o lugar de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_transporte_posterior_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Derechos e impuestos aplicables en el país de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="derechos_impuestos_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Monto de los intereses:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="intereses_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Otras deducciones legalmente aplicables:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="otras_deducciones_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Cuando alguno de los ajustes de las casillas en azul, se declaren con base en
+                                            resolución
+                                            o disposición administrativa, indicar el número y fecha de ésta. Así como el
+                                            número
+                                            de
+                                            casilla a la que corresponde:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" name="resolucion_ajuste_conformacion"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <textarea name="observaion_ajuste_conformacion" class="form-control mb-3"
+                                    rows="3"></textarea>
+                                <div class="row row-spacing">
+                                    <div class="col-md-2">
+                                        <p>Lugar:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="lugar_dva" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Fecha:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" name="fecha_dva" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div conformacion="proveedor_nPpc5ifAcm">
+                                <h6>A. Base de cálculo</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Precio según factura:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="precio_factura_conformacion" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Pagos indirectos y/o descuentos, retroactivos:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="pagos_indirectos_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <h6>B. Adiciones al precio realmente pagado o por pagar</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Monto de la condición o contraprestación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="monto_condicion_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos por comisiones o corretajes, salvo los de comisiones de compras:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="gastos_comisiones_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos y costos de envases y embalajes:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="gastos_envases_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los materiales, piezas y elementos, partes y artículos analizados
+                                            incorporados:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_materiales_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de las herramientas, matrices, moldes y elementos analizados necesarios
+                                            para la
+                                            producción:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_herramientas_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los materiales consumidos en la producción de las mercancias
+                                            importadas:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_materiales_consumidos_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de ingeniería, creación y perfeccionamiento, trabajos artísticos,
+                                            diseños,
+                                            planos y
+                                            croquis realizados fuera del país de importación y necesarios para la
+                                            producción:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_ingenieria_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Valor de los cánones y derechos de licencias:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_canones_licencias_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de transporte de las mercancías importadas hasta el puerto o lugar de
+                                            importación:
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_transporte_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de cargas, descarga y manipulación ocasionadas por el transporte de
+                                            las
+                                            mercancías
+                                            importadas hasta el puerto o lugar de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_cargas_descarga_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Seguro:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_seguro_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <h6>C. Deducciones: Importes incluidos en A</h6>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Gastos de contrucción, armado, montaje, mantenimiento o asistencia técnica
+                                            realizados
+                                            después de la importación, en relación a las mercancias importadas:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_construccion_posterior_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Costos del transporte posterior al puerto o lugar de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="valor_transporte_posterior_conformacion"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Derechos e impuestos aplicables en el país de importación:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="derechos_impuestos_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Monto de los intereses:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="intereses_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Otras deducciones legalmente aplicables:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" name="otras_deducciones_conformacion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row row-spacing">
+                                    <div class="col-md-10">
+                                        <p>Cuando alguno de los ajustes de las casillas en azul, se declaren con base en
+                                            resolución
+                                            o disposición administrativa, indicar el número y fecha de ésta. Así como el
+                                            número
+                                            de
+                                            casilla a la que corresponde:</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" name="resolucion_ajuste_conformacion"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+                                <textarea name="observaion_ajuste_conformacion" class="form-control mb-3"
+                                    rows="3"></textarea>
+                                <div class="row row-spacing">
+                                    <div class="col-md-2">
+                                        <p>Lugar:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="lugar_dva" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Fecha:</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" name="fecha_dva" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 5: FACTURAS -->
+                <section class="container" id="sec-facturas">
+                    <h3 class="section-title">Factura</h3>
+                    <div class="table-responsive mb-5" style="max-height: 234px; overflow-y: auto;">
+                        <div class="row g-0">
+                            <table id="tabla_facturas" class="table table-striped table-hover">
+                                <colgroup>
+                                    <col style="width: 3%;"> <!--Agregar-->
+                                    <col style="width: 3%;"> <!--Eliminar-->
+                                    <col style="width: 64%;"> <!--Número de factura-->
+                                    <col style="width: 15%;"> <!--Fecha-->
+                                    <col style="width: 15%;"> <!--Monto-->
+                                </colgroup>
+                                <thead>
+                                    <tr class="text-center sticky-top">
+                                        <th></th>
+                                        <th></th>
+                                        <th>Número de factura</th>
+                                        <th>Fecha</th>
+                                        <th>Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody proveedor="proveedor" style="display:none;">
+                                    <tr id="factura">
+                                        <td>
+                                            <button type="button" name="agregar_fila" class="btn btn-primary btn-sm"
+                                                tabindex="-1">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" name="eliminar_fila" class="btn btn-danger btn-sm"
+                                                tabindex="-1">-</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="numero_factura" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="date" name="fecha_factura" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="monto_factura" class="form-control">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody proveedor="proveedor_nPpc5ifAcm">
+                                    <tr id="factura_SMbdo8AiyD">
+                                        <td>
+                                            <button type="button" name="agregar_fila" class="btn btn-primary btn-sm"
+                                                tabindex="-1">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" name="eliminar_fila" class="btn btn-danger btn-sm"
+                                                tabindex="-1">-</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="numero_factura" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="date" name="fecha_factura" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="monto_factura" class="form-control">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 6: ARTÍCULOS -->
+                <section class="container" id="sec-articulos">
+                    <h3 class="section-title">Artículo</h3>
+                    <div id="articulos" class="custom-card">
+                        <div class="col-md-12">
+                            <div class="row row-spacing">
+                                <div class="col-md-2">
+                                    <label class="form-label-custom">Código</label>
+                                    <input type="text" name="codigo_articulo" class="form-control">
+                                </div>
+                                <div class="col-md-10">
+                                    <label class="form-label-custom">Información en base de datos</label>
+                                    <input type="text" name="informacion_articulo" class="form-control" tabindex="-1"
+                                        readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label-custom">Descripción ampliada</label>
+                            <input type="text" name="ampliada_articulo" class="form-control">
+                        </div>
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">País de origen</label>
+                                        <input type="text" name="pais_de_origen_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Régimen</label>
+                                        <input type="text" name="regimen_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">SubRégimen</label>
+                                        <input type="text" name="sub_regimen_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Preferencia</label>
+                                        <input type="text" name="preferencia_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">RGO-A</label>
+                                        <input type="text" name="rgo-a_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">RGO-B</label>
+                                        <input type="text" name="rgo-b_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">CEUP</label>
+                                        <input type="text" name="ceup_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Estado</label>
+                                        <input type="text" name="estado_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Bultos</label>
+                                        <input type="text" name="bulto_articulo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Embalaje</label>
+                                        <input type="text" name="embalaje_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Peso bruto</label>
+                                        <input type="text" name="peso_bruto_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Peso neto</label>
+                                        <input type="text" name="peso_neto_articulo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Cantidad</label>
+                                        <input type="text" name="cantidad_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Und./medida</label>
+                                        <input type="text" name="unidad_de_medida_articulo" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label-custom">Und. estad.</label>
+                                        <input type="text" name="unidad_estadistica_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-end pb-1">
+                                        <p name="unidad_articulo" class="mb-0"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Total est.</label>
+                                        <input type="text" name="total_estadistica_articulo" class="form-control"
+                                            readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Precio</label>
+                                        <input type="text" name="precio_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Total</label>
+                                        <input type="text" name="total_articulo" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-spacing">
+                            <div class="col-md-6">
+                                <div class="row row-spacing">
+                                    <div class="col-md-8">
+                                        <label class="form-label-custom">VIN/Chasis/Serie</label>
+                                        <input type="text" name="vin_articulo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label-custom">Año</label>
+                                        <input type="text" name="anio_articulo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row justify-content-end row-spacing">
+                                    <div class="col-md-6">
+                                        <button type="button" id="anexar_articulo" name="anexar_articulo"
+                                            class="btn btn-primary-custom btn-bg">Anexar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 7: TABLA DE ARTÍCULOS -->
+                <section class="container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <ul class="nav nav-pills" id="pills-tab-articulos" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active fw-bold" id="tab-detalle-tab" data-bs-toggle="pill"
+                                    data-bs-target="#tab-detalle" type="button" role="tab">
+                                    <i class="bi bi-list-nested"></i> Detalle de Artículos
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-bold" id="tab-posiciones-tab" data-bs-toggle="pill"
+                                    data-bs-target="#tab-posiciones" type="button" role="tab"
+                                    onclick="generarPreliquidacionAgrupada()">
+                                    <i class="bi bi-diagram-3-fill"></i> Preliquidación (Posiciones Arancelarias)
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="pills-tabContentArticulos">
+                        <!-- VISTA DETALLE -->
+                        <div class="tab-pane fade show active" id="tab-detalle" role="tabpanel">
+                            <div class="table-responsive mb-4" style="max-height: 280px; overflow-y: auto;">
+                                <table id="tabla_articulos" class="table table-striped table-hover"
+                                    style="table-layout: fixed; width: 3747px;">
+                                    <colgroup>
+                                        <col style="width: 36px;"> <!--Boton agregar-->
+                                        <col style="width: 36px;"> <!--Boton eliminar-->
+                                        <col style="width: 150px;"> <!--Codigo-->
+                                        <col style="width: 250px;"> <!--Nombre comercial-->
+                                        <col style="width: 400px;"> <!--Descripción-->
+                                        <col style="width: 150px;"> <!--Partida-->
+                                        <col style="width: 150px;"> <!--Marca-->
+                                        <col style="width: 150px;"> <!--Modelo-->
+                                        <col style="width: 150px;"> <!--Pais-->
+                                        <col style="width: 300px;"> <!--Ampliada-->
+                                        <col style="width: 150px;"> <!--Regimen-->
+                                        <col style="width: 150px;"> <!--Sub-Regimen-->
+                                        <col style="width: 150px;"> <!--Preferencia-->
+                                        <col style="width: 75px;"> <!--RGO-A-->
+                                        <col style="width: 75px;"> <!--RGO-B-->
+                                        <col style="width: 75px;"> <!--CEUP-->
+                                        <col style="width: 100px;"> <!--Estado-->
+                                        <col style="width: 75px;"> <!--Bultos-->
+                                        <col style="width: 100px;"> <!--Embalaje-->
+                                        <col style="width: 100px;"> <!--Peso bruto-->
+                                        <col style="width: 100px;"> <!--Peso neto-->
+                                        <col style="width: 100px;"> <!--Cantidad-->
+                                        <col style="width: 150px;"> <!--Unidad de medida-->
+                                        <col style="width: 150px;"> <!--Unidad estadística-->
+                                        <col style="width: 75px;"> <!--Unidad-->
+                                        <col style="width: 150px;"> <!--Precio-->
+                                        <col style="width: 200px;"> <!--Total-->
+                                    </colgroup>
+                                    <thead>
+                                        <tr class="text-center sticky-top">
+                                            <th></th>
+                                            <th></th>
+                                            <th>Código</th>
+                                            <th>Nombre comercial</th>
+                                            <th>Descripción</th>
+                                            <th>Partida</th>
+                                            <th>Marca</th>
+                                            <th>Modelo</th>
+                                            <th>País</th>
+                                            <th>Ampliada</th>
+                                            <th>Régimen</th>
+                                            <th>Sub-Régimen</th>
+                                            <th>Preferencia</th>
+                                            <th>RGO-A</th>
+                                            <th>RGO-B</th>
+                                            <th>CEUP</th>
+                                            <th>Estado</th>
+                                            <th>Bultos</th>
+                                            <th>Embalaje</th>
+                                            <th>Peso bruto</th>
+                                            <th>Peso neto</th>
+                                            <th>Cantidad</th>
+                                            <th>Unidad de medida</th>
+                                            <th>Unidad estadística</th>
+                                            <th>Unidad</th>
+                                            <th>Precio</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody factura="factura" style="display:none;">
+                                        <tr>
+                                            <td>
+                                                <button type="button" name="agregar_fila_articulo"
+                                                    class="btn btn-primary btn-sm" tabindex="-1">+</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" name="eliminar_fila_articulo"
+                                                    class="btn btn-danger btn-sm" tabindex="-1">-</button>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="codigo_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="nombre_comercial_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="descripcion_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="partida_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="marca_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="modelo_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="pais_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="ampliada_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="regimen_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="sub_regimen_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="preferencia_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="rgo-a_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="rgo-b_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="ceup_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="estado_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="bulto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="embalaje_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="peso_bruto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="peso_neto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="cantidad_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_de_medida_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_estadistica_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_articulo"
+                                                    class="form-control form-control-xs" value="" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="precio_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="total_articulo"
+                                                    class="form-control form-control-xs" value="" readonly>
+                                            </td>
+                                            <td style="display: none;">
+                                                <input type="text" name="vin_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td style="display: none;">
+                                                <input type="text" name="anio_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody factura="factura_SMbdo8AiyD">
+                                        <tr>
+                                            <td>
+                                                <button type="button" name="agregar_fila_articulo"
+                                                    class="btn btn-primary btn-sm" tabindex="-1">+</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" name="eliminar_fila_articulo"
+                                                    class="btn btn-danger btn-sm" tabindex="-1">-</button>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="codigo_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="nombre_comercial_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="descripcion_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="partida_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="marca_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="modelo_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="pais_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="ampliada_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="regimen_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="sub_regimen_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="preferencia_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="rgo-a_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="rgo-b_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="ceup_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="estado_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="bulto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="embalaje_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="peso_bruto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="peso_neto_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="cantidad_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_de_medida_articulo"
+                                                    class="form-control form-control-xs" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_estadistica_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="unidad_articulo"
+                                                    class="form-control form-control-xs" value="" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="precio_articulo"
+                                                    class="form-control form-control-xs">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="total_articulo"
+                                                    class="form-control form-control-xs" value="" readonly>
+                                            </td>
+                                            <td style="display: none;">
+                                                <input type="text" name="vin_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                            <td style="display: none;">
+                                                <input type="text" name="anio_articulo"
+                                                    class="form-control form-control-xs" readonly>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- VISTA PRELIQUIDACIÓN (POSICIONES ARANCELARIAS) -->
+                        <div class="tab-pane fade" id="tab-posiciones" role="tabpanel">
+                            <div class="table-responsive mb-4" style="max-height: 350px; overflow-y: auto;">
+                                <table id="tabla_posiciones"
+                                    class="table table-bordered table-striped table-hover align-middle"
+                                    style="table-layout: fixed; width: 2200px;">
+                                    <colgroup>
+                                        <col style="width: 80px;"> <!-- Posición # -->
+                                        <col style="width: 140px;"> <!-- Partida -->
+                                        <col style="width: 100px;"> <!-- Régimen -->
+                                        <col style="width: 100px;"> <!-- Sub-Régimen -->
+                                        <col style="width: 110px;"> <!-- Trato Pref. -->
+                                        <col style="width: 100px;"> <!-- País Origen -->
+                                        <col style="width: 90px;"> <!-- RGO-A -->
+                                        <col style="width: 90px;"> <!-- RGO-B -->
+                                        <col style="width: 110px;"> <!-- Bultos -->
+                                        <col style="width: 130px;"> <!-- Peso Bruto -->
+                                        <col style="width: 130px;"> <!-- Peso Neto -->
+                                        <col style="width: 140px;"> <!-- Cantidad Est. -->
+                                        <col style="width: 160px;"> <!-- Total FOB ($) -->
+                                        <col style="width: 160px;"> <!-- Total Flete ($) -->
+                                        <col style="width: 160px;"> <!-- Total Seguro ($) -->
+                                        <col style="width: 180px;"> <!-- Total CIF ($) -->
+                                    </colgroup>
+                                    <thead class="table-dark text-center sticky-top">
+                                        <tr>
+                                            <th>Pos.</th>
+                                            <th>Partida</th>
+                                            <th>Régimen</th>
+                                            <th>Sub-Rég.</th>
+                                            <th>Trato Pref.</th>
+                                            <th>País</th>
+                                            <th>RGO-A</th>
+                                            <th>RGO-B</th>
+                                            <th>Bultos</th>
+                                            <th>P. Bruto (kg)</th>
+                                            <th>P. Neto (kg)</th>
+                                            <th>Cant. Est.</th>
+                                            <th>FOB ($)</th>
+                                            <th>Flete ($)</th>
+                                            <th>Seguro ($)</th>
+                                            <th>CIF ($)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_posiciones">
+                                        <!-- Se genera dinámicamente -->
+                                    </tbody>
+                                    <tfoot class="table-secondary fw-bold text-end" id="tfoot_posiciones">
+                                        <!-- Totales de control -->
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- SECCIÓN 8: DOCUMENTOS ADJUNTOS -->
+                <section class="container" id="sec-documentos">
+                    <h3 class="section-title">Documentos adjuntos</h3>
+                    <div class="table-responsive mb-5" style="max-height: 215px; overflow-y: auto;">
+                        <div class="row g-0">
+                            <table class="table table-striped table-hover">
+                                <colgroup>
+                                    <col style="width: 3%;"> <!--Agregar-->
+                                    <col style="width: 3%;"> <!--Eliminar-->
+                                    <col style="width: 35%;"> <!--Código-->
+                                    <col style="width: 37%;"> <!--Descripcion-->
+                                    <col style="width: 12%;"> <!--Fecha-->
+                                    <col style="width: 10%;"> <!--País-->
+                                </colgroup>
+                                <thead>
+                                    <tr class="text-center sticky-top">
+                                        <th></th>
+                                        <th></th>
+                                        <th>Código</th>
+                                        <th>Descripción</th>
+                                        <th>Fecha</th>
+                                        <th>País</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla_documentos">
+                                    <tr id="fila_documentos" style="display: none;">
+                                        <td>
+                                            <button type="button" name="agregar_fila_documentos"
+                                                class="btn btn-primary btn-sm" tabindex="-1">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" name="eliminar_fila_documentos"
+                                                class="btn btn-danger btn-sm" tabindex="-1">-</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="codigo" class="form-control form-control-xs"
+                                                autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="descripcion_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                        <td>
+                                            <input type="date" name="fecha_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="pais_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" name="agregar_fila_documentos"
+                                                class="btn btn-primary btn-sm" tabindex="-1">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" name="eliminar_fila_documentos"
+                                                class="btn btn-danger btn-sm" tabindex="-1">-</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="codigo" class="form-control form-control-xs"
+                                                autocomplete="off">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="descripcion_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                        <td>
+                                            <input type="date" name="fecha_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="pais_documentos"
+                                                class="form-control form-control-xs">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 9: OBSERVACIONES -->
+                <section class="container" id="sec-observaciones">
+                    <div class="col-md-12">
+                        <h3 class="section-title">Observaciones</h3>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#observaciones">Observaciones</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="tab" href="#informacion">Página de Información</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="observaciones" class="tab-pane fade show active">
+                                <textarea name="observaciones" class="form-control" rows="50"></textarea>
+                            </div>
+                            <div id="informacion" class="tab-pane fade">
+                                <textarea name="informacion" class="form-control" rows="50"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- 3. BARRA DE ACCIONES FLOTANTE (STICKY FOOTER) -->
+    <footer
+        class="fixed-bottom bg-white border-top py-2 px-4 shadow-lg d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-warning text-dark me-2">Estado: Borrador</span>
+            <small class="text-muted">Última modificación: Hoy 22:08</small>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-save"></i> Guardar Borrador</button>
+            <button class="btn btn-outline-primary btn-sm"><i class="bi bi-check-circle"></i> Validar</button>
+            <button class="btn btn-primary btn-sm"><i class="bi bi-send"></i> Transmitir DUA</button>
+        </div>
+    </footer>
+    <!-- JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/catalogo.js"></script>
+    <script src="js/aforo.js"></script>
+</body>
+
+</html>

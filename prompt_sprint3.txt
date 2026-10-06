@@ -1,0 +1,52 @@
+OBJETIVO: Implementar el módulo y motor de cálculo tributario aduanero (Liquidación Impositiva) en 'backend/'.
+
+REQUISITOS TÉCNICOS:
+
+1. ESQUEMAS PYDANTIC ('backend/schemas/liquidacion.py'):
+   - ItemCalculoRequest:
+     * partida_arancelaria: str (13 dígitos)
+     * valor_fob: float (USD)
+     * flete: float (USD, opcional, default 0.0)
+     * seguro: float (USD, opcional, default 0.0)
+     * otros_gastos: float (USD, opcional, default 0.0)
+     * codigo_acuerdo: str (opcional, ej. 'CAFTA', 'TLC_MEX', etc.)
+   - CalculoTributarioRequest:
+     * tasa_cambio: float (Tasa de cambio Oficial NIO/USD)
+     * items: List[ItemCalculoRequest]
+   - ItemCalculoResponse:
+     * partida_arancelaria, descripcion_partida
+     * cif_usd, cif_nio
+     * porcentaje_dai, dai_nio, dai_usd
+     * porcentaje_isc, isc_nio, isc_usd
+     * porcentaje_iva, iva_nio, iva_usd
+     * porcentaje_rir, rir_nio, rir_usd
+     * total_tributos_nio, total_tributos_usd
+     * acuerdo_aplicado: str
+   - LiquidacionTotalResponse:
+     * tasa_cambio: float
+     * total_cif_usd, total_cif_nio
+     * total_dai_nio, total_isc_nio, total_iva_nio, total_rir_nio
+     * total_tributos_nio, total_tributos_usd
+     * items: List[ItemCalculoResponse]
+
+2. SERVICIO DE LÓGICA DE NEGOCIO ('backend/services/liquidacion.py'):
+   - Función para calcular el Valor CIF en USD y conversión a NIO según la tasa de cambio.
+   - Consulta a la BD para obtener las alícuotas base (DAI, ISC, IVA, RIR) de la tabla 'partida_arancelaria'.
+   - Si se especifica 'codigo_acuerdo', consultar la tabla 'tratados' para verificar si aplica una tasa preferencial de DAI.
+   - Fórmulacas de Cascada Impositiva Aduanera (Nicaragua):
+     * CIF_NIO = CIF_USD * tasa_cambio
+     * DAI_NIO = CIF_NIO * (% DAI / 100)
+     * ISC_NIO = (CIF_NIO + DAI_NIO) * (% ISC / 100)
+     * IVA_NIO = (CIF_NIO + DAI_NIO + ISC_NIO) * (% IVA / 100)
+     * RIR_NIO = (CIF_NIO + DAI_NIO + ISC_NIO + IVA_NIO) * (% RIR / 100)
+     * Total Tributos NIO = DAI_NIO + ISC_NIO + IVA_NIO + RIR_NIO
+
+3. ROUTER Y ENDPOINT ('backend/routers/liquidacion.py'):
+   - POST /api/v1/liquidacion/calcular -> Recibe CalculoTributarioRequest y retorna LiquidacionTotalResponse.
+   - Registrar el router en 'backend/main.py'.
+
+4. SCRIPT DE PRUEBA ('backend/test_liquidacion.py'):
+   - Probar el cálculo de liquidación para una importación con 2 ítems utilizando TestClient:
+     * Ítem 1: Partida '0101210000000' (DAI 0%, IVA 15%).
+     * Ítem 2: Partida '0101290000000' (DAI 10%, IVA 15%) con FOB $1,000, Flete $100, Seguro $20, Tasa $36.6243.
+   - Verificar y mostrar en consola el desglose exacto de los tributos en NIO.
