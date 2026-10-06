@@ -23,6 +23,12 @@ from backend.schemas.liquidacion import (
     ItemCalculoResponse,
     LiquidacionTotalResponse,
 )
+from backend.schemas.declaracion import (
+    DeclaracionCreate,
+    DeclaracionItemCreate,
+    DeclaracionItemResponse,
+    DeclaracionResponse,
+)
 
 __all__ = [
     "PartidaArancelariaResponse",
@@ -37,4 +43,8 @@ __all__ = [
     "ItemCalculoRequest",
     "ItemCalculoResponse",
     "LiquidacionTotalResponse",
+    "DeclaracionCreate",
+    "DeclaracionItemCreate",
+    "DeclaracionItemResponse",
+    "DeclaracionResponse",
 ]

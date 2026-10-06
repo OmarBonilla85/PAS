@@ -1,0 +1,79 @@
+/* Estilos propios del Dashboard PAS (Sprint 7).
+   La mayor parte de la estética usa Tailwind CSS vía CDN; aquí solo se
+   añaden los componentes reutilizables y detalles que Tailwind no cubre. */
+
+.module-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  padding: 0.9rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.module-tab:hover {
+  color: #0f172a;
+}
+
+.module-tab-active {
+  border-bottom-color: #2563eb;
+  color: #1d4ed8;
+}
+
+.autocomplete-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item:focus {
+  background-color: #eff6ff;
+  outline: none;
+}
+
+.autocomplete-codigo {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+  color: #1d4ed8;
+  flex-shrink: 0;
+}
+
+.autocomplete-desc {
+  color: #475569;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-card {
+  border-radius: 0.75rem;
+  background-color: #f8fafc;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #64748b;
+}
+
+.metric-value {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}

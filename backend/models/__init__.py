@@ -6,6 +6,7 @@ Re-exporta todas las clases para facilitar importaciones como:
 """
 
 from backend.models.arancel import PartidaArancelaria, Tratados
+from backend.models.declaracion import DeclaracionEncabezado, DeclaracionItem
 from backend.models.catalogos import (
     Acuerdo,
     Aduana,
@@ -35,6 +36,8 @@ from backend.models.catalogos import (
 __all__ = [
     "PartidaArancelaria",
     "Tratados",
+    "DeclaracionEncabezado",
+    "DeclaracionItem",
     "Regimen",
     "SubRegimen",
     "Almacen",
