@@ -67,6 +67,10 @@ class LiquidacionTotalResponse(BaseModel):
     total_isc_nio: float
     total_iva_nio: float
     total_rir_nio: float
+    total_dai_usd: float
+    total_isc_usd: float
+    total_iva_usd: float
+    total_rir_usd: float
     total_tributos_nio: float
     total_tributos_usd: float
     items: List[ItemCalculoResponse]

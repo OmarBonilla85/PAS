@@ -40,6 +40,16 @@ function porcentaje(valor) {
   return Number.isFinite(n) ? `${formatoMoneda.format(n)}%` : "—";
 }
 
+function monedaNio(valor) {
+  const n = Number(valor);
+  return Number.isFinite(n) ? `C$ ${formatoMoneda.format(n)}` : "—";
+}
+
+function monedaUsd(valor) {
+  const n = Number(valor);
+  return Number.isFinite(n) ? `$${formatoMoneda.format(n)} USD` : "—";
+}
+
 let toastTimer = null;
 function toast(mensaje, ok = true) {
   const caja = $("#toast");
@@ -328,13 +338,23 @@ function metricasItem(item) {
   return [
     { etiqueta: "CIF USD", valor: moneda(item.cif_usd) },
     { etiqueta: "CIF NIO", valor: moneda(item.cif_nio) },
-    { etiqueta: `DAI (${porcentaje(item.porcentaje_dai)})`, valor: moneda(item.dai_nio) },
-    { etiqueta: `ISC (${porcentaje(item.porcentaje_isc)})`, valor: moneda(item.isc_nio) },
-    { etiqueta: `IVA (${porcentaje(item.porcentaje_iva)})`, valor: moneda(item.iva_nio) },
-    { etiqueta: `RIR (${porcentaje(item.porcentaje_rir)})`, valor: moneda(item.rir_nio) },
+    metricaDual(`DAI (${porcentaje(item.porcentaje_dai)})`, item.dai_nio, item.dai_usd),
+    metricaDual(`ISC (${porcentaje(item.porcentaje_isc)})`, item.isc_nio, item.isc_usd),
+    metricaDual(`IVA (${porcentaje(item.porcentaje_iva)})`, item.iva_nio, item.iva_usd),
+    metricaDual(`RIR (${porcentaje(item.porcentaje_rir)})`, item.rir_nio, item.rir_usd),
     { etiqueta: "Total NIO", valor: moneda(item.total_tributos_nio) },
     { etiqueta: "Total USD", valor: moneda(item.total_tributos_usd) },
   ];
+}
+
+function metricaDual(etiqueta, valorNio, valorUsd) {
+  return {
+    etiqueta,
+    valores: [
+      { texto: monedaNio(valorNio), clase: "metric-value" },
+      { texto: monedaUsd(valorUsd), clase: "metric-value metric-value-secondary" },
+    ],
+  };
 }
 
 function pintarMetricas(contenedor, metricas) {
@@ -342,9 +362,14 @@ function pintarMetricas(contenedor, metricas) {
   metricas.forEach((m) => {
     const div = document.createElement("div");
     div.className = "metric-card";
+    const valoresHTML = (m.valores || [{ texto: m.valor }])
+      .map(
+        (v) =>
+          `<div class="${escaparHTML(v.clase || "metric-value")}">${escaparHTML(v.texto)}</div>`
+      )
+      .join("");
     div.innerHTML =
-      `<div class="metric-label">${escaparHTML(m.etiqueta)}</div>` +
-      `<div class="metric-value">${escaparHTML(m.valor)}</div>`;
+      `<div class="metric-label">${escaparHTML(m.etiqueta)}</div>` + valoresHTML;
     contenedor.appendChild(div);
   });
 }
@@ -371,10 +396,10 @@ function renderResultadoCalculadora(datos) {
   pintarMetricas($("#calc-totales"), [
     { etiqueta: "CIF USD", valor: moneda(datos.total_cif_usd) },
     { etiqueta: "CIF NIO", valor: moneda(datos.total_cif_nio) },
-    { etiqueta: "DAI NIO", valor: moneda(datos.total_dai_nio) },
-    { etiqueta: "ISC NIO", valor: moneda(datos.total_isc_nio) },
-    { etiqueta: "IVA NIO", valor: moneda(datos.total_iva_nio) },
-    { etiqueta: "RIR NIO", valor: moneda(datos.total_rir_nio) },
+    metricaDual("DAI", datos.total_dai_nio, datos.total_dai_usd),
+    metricaDual("ISC", datos.total_isc_nio, datos.total_isc_usd),
+    metricaDual("IVA", datos.total_iva_nio, datos.total_iva_usd),
+    metricaDual("RIR", datos.total_rir_nio, datos.total_rir_usd),
     { etiqueta: "Tributos NIO", valor: moneda(datos.total_tributos_nio) },
     { etiqueta: "Tributos USD", valor: moneda(datos.total_tributos_usd) },
   ]);
@@ -624,13 +649,13 @@ async function guardarDeclaracion() {
 async function cargarHistorial() {
   const cuerpo = $("#duca-historial");
   cuerpo.innerHTML =
-    '<tr><td colspan="9" class="px-3 py-6 text-center text-sm text-slate-400">Cargando…</td></tr>';
+    '<tr><td colspan="10" class="px-3 py-6 text-center text-sm text-slate-400">Cargando…</td></tr>';
   try {
     const datos = await apiFetch("/api/v1/declaraciones?skip=0&limit=50");
     cuerpo.innerHTML = "";
     if (!datos || !datos.length) {
       cuerpo.innerHTML =
-        '<tr><td colspan="9" class="px-3 py-6 text-center text-sm text-slate-400">No hay declaraciones registradas.</td></tr>';
+        '<tr><td colspan="10" class="px-3 py-6 text-center text-sm text-slate-400">No hay declaraciones registradas.</td></tr>';
       return;
     }
     datos.forEach((d) => {
@@ -639,6 +664,10 @@ async function cargarHistorial() {
       const fecha = d.fecha_creacion
         ? new Date(d.fecha_creacion).toLocaleString("es-NI")
         : "—";
+      const tributosUsd =
+        Number(d.tasa_cambio) > 0
+          ? Number(d.total_tributos_nio) / Number(d.tasa_cambio)
+          : null;
       fila.innerHTML = `
         <td class="px-3 py-2 font-mono text-xs font-semibold text-blue-700">${escaparHTML(d.numero_declaracion)}</td>
         <td class="px-3 py-2">${escaparHTML(d.importador_nombre)}</td>
@@ -646,14 +675,15 @@ async function cargarHistorial() {
         <td class="px-3 py-2 text-slate-500">${escaparHTML(d.regimen_codigo)}</td>
         <td class="px-3 py-2 text-right font-mono">${moneda(d.total_fob_usd)}</td>
         <td class="px-3 py-2 text-right font-mono">${moneda(d.total_cif_usd)}</td>
-        <td class="px-3 py-2 text-right font-mono font-semibold">${moneda(d.total_tributos_nio)}</td>
+        <td class="px-3 py-2 text-right font-mono font-semibold">${monedaNio(d.total_tributos_nio)}</td>
+        <td class="px-3 py-2 text-right font-mono">${monedaUsd(tributosUsd)}</td>
         <td class="px-3 py-2"><span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">${escaparHTML(d.estado)}</span></td>
         <td class="px-3 py-2 text-xs text-slate-500">${escaparHTML(fecha)}</td>`;
       cuerpo.appendChild(fila);
     });
   } catch (err) {
     cuerpo.innerHTML =
-      `<tr><td colspan="9" class="px-3 py-6 text-center text-sm text-red-500">${escaparHTML(err.message)}</td></tr>`;
+      `<tr><td colspan="10" class="px-3 py-6 text-center text-sm text-red-500">${escaparHTML(err.message)}</td></tr>`;
   }
 }
 

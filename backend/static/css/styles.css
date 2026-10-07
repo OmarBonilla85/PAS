@@ -77,3 +77,10 @@
   font-weight: 700;
   color: #0f172a;
 }
+
+.metric-value-secondary {
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+}
