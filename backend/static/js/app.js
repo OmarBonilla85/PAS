@@ -280,6 +280,8 @@ function inicializarCalculadora() {
     const fob = Number($("#calc-fob").value || 0);
     const flete = Number($("#calc-flete").value || 0);
     const seguro = Number($("#calc-seguro").value || 0);
+    const otrosGastos = Number($("#calc-otros-gastos").value || 0);
+    const deducciones = Number($("#calc-deducciones").value || 0);
     const acuerdo = $("#calc-acuerdo").value;
 
     if (!partida) {
@@ -305,7 +307,8 @@ function inicializarCalculadora() {
               valor_fob: fob,
               flete,
               seguro,
-              otros_gastos: 0,
+              otros_gastos: otrosGastos,
+              deducciones,
               codigo_acuerdo: acuerdo || null,
             },
           ],
@@ -408,12 +411,12 @@ async function cargarCatalogosDUCA() {
     catalogoRegimenes = regimenes || [];
     catalogoUnidades = unidades || [];
 
-    poblarSelect($("#duca-aduana"), catalogoAduanas, "aduana", "descripcion");
-    poblarSelect($("#duca-regimen"), catalogoRegimenes, "regimen", "descripcion");
+    poblarSelect($("#duca-aduana"), catalogoAduanas);
+    poblarSelect($("#duca-regimen"), catalogoRegimenes);
     // Refresca las unidades de los ítems que ya se hubieran dibujado antes
     // de que terminara la carga asíncrona de los catálogos.
     document.querySelectorAll("#duca-items .item-unidad").forEach((select) => {
-      poblarSelect(select, catalogoUnidades, "unidad_medida", "descripcion");
+      poblarSelect(select, catalogoUnidades);
     });
     poblarSubregimenes();
   } catch (err) {
@@ -421,16 +424,18 @@ async function cargarCatalogosDUCA() {
   }
 }
 
-function poblarSelect(select, datos, claveCodigo, claveDescripcion) {
+function poblarSelect(select, datos) {
   select.innerHTML = "";
   const vacio = document.createElement("option");
   vacio.value = "";
   vacio.textContent = "Seleccionar…";
   select.appendChild(vacio);
-  (datos || []).forEach((d) => {
+  (datos || []).forEach((item) => {
+    const codigo = item.codigo || item.aduana || item.unidad || item.unidad_medida || item.regimen || item.id || '';
+    const descripcion = item.descripcion || item.nombre || '';
     const opcion = document.createElement("option");
-    opcion.value = d[claveCodigo];
-    opcion.textContent = `${d[claveCodigo]} — ${d[claveDescripcion] || ""}`;
+    opcion.value = codigo;
+    opcion.textContent = `${codigo}  ${descripcion}`;
     select.appendChild(opcion);
   });
 }
@@ -444,11 +449,15 @@ function poblarSubregimenes() {
   vacio.textContent = "Seleccionar…";
   select.appendChild(vacio);
 
-  const actual = catalogoRegimenes.find((r) => r.regimen === regimen);
+  const actual = catalogoRegimenes.find(
+    (r) => (r.codigo || r.regimen || "") === regimen
+  );
   (actual?.sub_regimenes || []).forEach((sr) => {
+    const codigo = sr.codigo || sr.id || "";
+    const descripcion = sr.descripcion || sr.sub_regimen || "";
     const opcion = document.createElement("option");
-    opcion.value = sr.id;
-    opcion.textContent = `${sr.id} — ${sr.descripcion || sr.sub_regimen || ""}`;
+    opcion.value = codigo;
+    opcion.textContent = `${codigo}  ${descripcion}`;
     select.appendChild(opcion);
   });
 }
@@ -479,6 +488,12 @@ function crearFilaItem(numero = 1) {
     <td class="px-3 py-2">
       <input type="number" class="item-seguro w-24 rounded-lg border border-slate-300 px-2 py-1.5 text-sm" min="0" step="0.01" value="0" />
     </td>
+    <td class="px-3 py-2">
+      <input type="number" class="item-otros-gastos w-28 rounded-lg border border-slate-300 px-2 py-1.5 text-sm" min="0" step="0.01" value="0" />
+    </td>
+    <td class="px-3 py-2">
+      <input type="number" class="item-deducciones w-28 rounded-lg border border-slate-300 px-2 py-1.5 text-sm" min="0" step="0.01" value="0" />
+    </td>
     <td class="px-3 py-2 text-right">
       <button type="button" class="eliminar-item rounded-lg px-2 py-1 text-slate-400 hover:bg-red-50 hover:text-red-600" title="Eliminar ítem">✕</button>
     </td>`;
@@ -495,12 +510,36 @@ function renumerarItems() {
 function agregarItem() {
   const cuerpo = $("#duca-items");
   const fila = crearFilaItem(cuerpo.children.length + 1);
-  poblarSelect(fila.querySelector(".item-unidad"), catalogoUnidades, "unidad_medida", "descripcion");
+  poblarSelect(fila.querySelector(".item-unidad"), catalogoUnidades);
   fila.querySelector(".eliminar-item").addEventListener("click", () => {
     fila.remove();
     renumerarItems();
   });
   cuerpo.appendChild(fila);
+  return fila;
+}
+
+function cargarDatosEjemplo() {
+  $("#duca-importador").value = "Importador de Prueba S.A.";
+  $("#duca-aduana").value = "0110";
+  $("#duca-regimen").value = "1000";
+  poblarSubregimenes();
+  $("#duca-subregimen").value = "1000000";
+  $("#duca-tasa").value = "36.6243";
+
+  $("#duca-items").innerHTML = "";
+  const fila = agregarItem();
+  fila.querySelector(".item-partida").value = "0101290000000";
+  fila.querySelector(".item-desc").value = "Caballos vivos (excepto reproductores)";
+  fila.querySelector(".item-cantidad").value = "2";
+  fila.querySelector(".item-unidad").value = "05";
+  fila.querySelector(".item-fob").value = "1000";
+  fila.querySelector(".item-flete").value = "100";
+  fila.querySelector(".item-seguro").value = "20";
+  fila.querySelector(".item-otros-gastos").value = "0";
+  fila.querySelector(".item-deducciones").value = "0";
+
+  toast("Datos de ejemplo cargados");
 }
 
 async function guardarDeclaracion() {
@@ -529,6 +568,8 @@ async function guardarDeclaracion() {
     const fob = Number(fila.querySelector(".item-fob").value || 0);
     const flete = Number(fila.querySelector(".item-flete").value || 0);
     const seguro = Number(fila.querySelector(".item-seguro").value || 0);
+    const otrosGastos = Number(fila.querySelector(".item-otros-gastos").value || 0);
+    const deducciones = Number(fila.querySelector(".item-deducciones").value || 0);
 
     if (!partida || !descripcion || !unidad) {
       toast("Cada ítem requiere partida, descripción y unidad de medida", false);
@@ -542,6 +583,8 @@ async function guardarDeclaracion() {
       valor_fob_usd: fob,
       flete_usd: flete,
       seguro_usd: seguro,
+      otros_gastos_usd: otrosGastos,
+      deducciones_usd: deducciones,
     });
   }
 

@@ -10,7 +10,7 @@ Los prefijos ``/api/v1/arancel`` se aplican en ``backend/main.py``.
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import or_, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
@@ -75,16 +75,23 @@ def buscar_partidas(
     limit: int = Query(20, ge=1, le=200, description="Máximo de resultados"),
     db: Session = Depends(get_db),
 ):
-    """Busca partidas por coincidencia de código o descripción."""
-    texto = f"%{q.strip()}%"
+    """Busca partidas por código (prefijo) o descripción (coincidencia).
+
+    Si la consulta inicia con dígitos (ej. ``39``) se filtra ``partida_arancelaria``
+    por prefijo (``LIKE '39%'``); si contiene texto se busca por descripción.
+    """
+    consulta = (q or "").strip()
+    if not consulta:
+        return []
+
+    if consulta[0].isdigit():
+        filtro = PartidaArancelaria.partida_arancelaria.ilike(f"{consulta}%")
+    else:
+        filtro = PartidaArancelaria.descripcion.ilike(f"%{consulta}%")
+
     partidas = db.execute(
         select(PartidaArancelaria)
-        .where(
-            or_(
-                PartidaArancelaria.partida_arancelaria.ilike(texto),
-                PartidaArancelaria.descripcion.ilike(texto),
-            )
-        )
+        .where(filtro)
         .order_by(PartidaArancelaria.partida_arancelaria)
         .limit(limit)
     ).scalars().all()

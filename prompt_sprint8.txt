@@ -1,0 +1,26 @@
+OBJETIVO: Normalizar las llaves de catlogos para corregir 'undefined' en el Frontend, refinar el buscador SAC por capátulo/prefijo, incorporar la valoraciín CIF completa (Gastos y Deducciones) y aóadir el botñn de prueba en la DUCA.
+
+REQUISITOS TóCNICOS:
+
+1. NORMALIZACIÉN DE CATÓLOGOS (SoluciÁn al 'undefined' en el Frontend):
+   - En 'backend/routers/catalogos.py' y 'backend/schemas/catalogos.py', estandarizar las respuestas JSON de católogos para que devuelvan siempre las llaves 'codigo' y 'descripcion' (mapeando columnas nativas como 'aduana', 'unidad', 'regimen', 'id').
+   - En 'backend/static/js/app.js', actualizar el llenado de los selectores (<select>) para Aduanas, Unidades de Medida, Regámenes y Sub-regímenes con fallbacks seguros:
+     const codigo = item.codigo || item.aduana || item.unidad || item.unidad_medida || item.regimen || item.id || '';
+     const descripcion = item.descripcion || item.nombre || '';
+     option.text = `${codigo}  ${descripcion}`;
+     option.value = codigo;
+
+2. BUSCADOR ARANCELARIO SAC POR PREFIJO/CAPíTULO ('backend/routers/arancel.py'):
+   - Si la consulta 'q' inicia con d—gitos numÍricos (ej. '39'), filtrar 'partida_arancelaria' buscando coincidencias íNICAMENTE desde el inicio de la cadena (LIKE 'q%').
+   - Si la consulta contiene texto, mantener la bésqueda por descripciÚn (ILIKE '%q%').
+
+3. VALORACIúN CIF COMPLETA EN CALCULADORA Y DUCA ('backend/schemas/liquidacion.py', 'backend/services/liquidacion.py', 'backend/templates/index.html', 'backend/static/js/app.js'):
+   - Actualizar el esquema y motor tributario para aceptar: 'otros_gastos' (float, default 0.0) y 'deducciones' (float, default 0.0).
+   - Aplicar la fórmula: CIF_USD = FOB + Flete + Seguro + otros_gastos - deducciones.
+   - En 'index.html' y 'app.js', incluir los inputs "Otros Gastos (USD)" y "Deducciones (USD)" tanto en la Calculadora Tributaria como en la tabla de Ótems de la DUCA.
+
+4. DUMMY DATA / BOTóN DE PRUEBA DUCA ('index.html' y 'app.js'):
+   - Agregar el botín "Cargar Datos de Ejemplo" en la interfaz de la DUCA que autocomplete automÓticamente importador, aduana, rógimen, sub-rágimen y un étem completo para poder probar la creacién y el guardado con un solo clic.
+
+5. VERIFICACIíN:
+   - Ejecutar 'python3 -m backend.test_api', 'python3 -m backend.test_liquidacion', 'python3 -m backend.test_declaracion' y 'python3 -m backend.test_frontend' para confirmar que todos los componentes pasan sin errores.

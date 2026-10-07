@@ -1,0 +1,19 @@
+OBJETIVO: Versionar el Sprint 6 en Git (Push a GitHub) y construir la Interfaz Web Dashboard (Frontend) del sistema PAS servida por FastAPI.
+
+REQUISITOS TÉCNICOS:
+
+1. CONTROL DE VERSIONES (GIT):
+   - Registrar los cambios de 'backend/' y nuevos módulos en Git.
+   - Mensaje de commit: "feat(declaracion): implementa modulo DUCA encabezado y detalle con liquidador automatizado"
+   - Ejecutar 'git push origin main' para actualizar el repositorio remoto en GitHub.
+
+2. FRONTEND WEB DASHBOARD ('backend/static/' y 'backend/templates/'):
+   - Configurar FastAPI para servir archivos estáticos ('/static') e HTML.
+   - Crear una interfaz web moderna y responsiva (HTML5 + JavaScript vanilla + Tailwind CSS vía CDN) integrada en la aplicación con 3 módulos principales:
+     a) "Buscador Arancelario (SAC)": Buscador en tiempo real de partidas arancelarias con autocompletado y desglose de alícuotas (DAI, ISC, IVA, RIR) y acuerdos/tratados.
+     b) "Calculadora Tributaria": Formulario interactivo para ingresar FOB, Flete, Seguro, Tasa de cambio y código de acuerdo, calculando la cascada impositiva mediante '/api/v1/liquidacion/calcular'.
+     c) "Gestión de Declaraciones (DUCA)": Formulario para estructurar y guardar nuevas declaraciones aduaneras y visualización en tabla del historial de declaraciones registradas.
+
+3. SCRIPT DE PRUEBA Y VALIDACIÓN:
+   - Verificar la integración de rutas de plantilla en 'backend/main.py'.
+   - Crear un script 'backend/test_frontend.py' que valide mediante TestClient la disponibilidad de la interfaz web en la ruta raíz '/' y la carga de estáticos.

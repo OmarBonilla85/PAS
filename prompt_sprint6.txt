@@ -1,0 +1,43 @@
+OBJETIVO: Crear la estructura del módulo de Declaraciones Aduaneras (DUCA) en el backend (Modelos, Esquemas y Routers).
+
+REQUISITOS TÉCNICOS:
+
+1. TABLAS EN BASE DE DATOS ('backend/models/declaracion.py'):
+   - DeclaracionEncabezado:
+     * id: int (PK, autoincremental)
+     * numero_declaracion: str (Único, ej. "PAS-2026-00001")
+     * aduana_codigo: str (FK -> aduana.aduana)
+     * regimen_codigo: str (FK -> regimen.regimen)
+     * subregimen_codigo: str (FK -> sub_regimen.id)
+     * importador_nombre: str
+     * tasa_cambio: float
+     * total_fob_usd: float
+     * total_cif_usd: float
+     * total_tributos_nio: float
+     * estado: str (default "BORRADOR")
+     * fecha_creacion: datetime
+   - DeclaracionItem:
+     * id: int (PK, autoincremental)
+     * declaracion_id: int (FK -> declaracion_encabezado.id)
+     * numero_item: int
+     * partida_arancelaria: str (13 dígitos)
+     * descripcion_comercial: str
+     * cantidad: float
+     * unidad_medida: str
+     * valor_fob_usd: float
+     * flete_usd: float
+     * seguro_usd: float
+     * cif_usd: float
+     * dai_nio: float, isc_nio: float, iva_nio: float, rir_nio: float
+     * total_tributos_nio: float
+
+2. ESQUEMAS PYDANTIC ('backend/schemas/declaracion.py'):
+   - Schemas para entrada y salida: DeclaracionItemCreate, DeclaracionCreate, DeclaracionResponse.
+
+3. RUTAS / ENDPOINTS ('backend/routers/declaracion.py'):
+   - POST /api/v1/declaraciones -> Crea una nueva declaración recalculando automáticamente sus tributos con el motor de liquidación.
+   - GET /api/v1/declaraciones/{id} -> Devuelve el detalle completo de la declaración y sus ítems.
+   - GET /api/v1/declaraciones -> Lista las declaraciones registradas con soporte de paginación.
+
+4. SCRIPT DE PRUEBA ('backend/test_declaracion.py'):
+   - Script que use TestClient para crear una declaración completa de prueba y consultar su detalle.

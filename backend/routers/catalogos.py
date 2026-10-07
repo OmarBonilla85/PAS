@@ -35,12 +35,12 @@ def listar_regimenes(db: Session = Depends(get_db)):
     respuesta = []
     for reg in regimenes:
         sub_regimenes = [
-            SubRegimenResponse.model_validate(sr)
+            SubRegimenResponse(codigo=sr.id, descripcion=sr.descripcion)
             for sr in sorted(reg.sub_regimenes, key=lambda s: s.id)
         ]
         respuesta.append(
             RegimenResponse(
-                regimen=reg.regimen,
+                codigo=reg.regimen,
                 descripcion=reg.descripcion,
                 sub_regimenes=sub_regimenes,
             )
@@ -51,9 +51,13 @@ def listar_regimenes(db: Session = Depends(get_db)):
 @router.get("/almacenes", response_model=List[AlmacenResponse])
 def listar_almacenes(db: Session = Depends(get_db)):
     """Lista los almacenes/recintos aduaneros."""
-    return db.execute(
+    almacenes = db.execute(
         select(Almacen).order_by(Almacen.almacen)
     ).scalars().all()
+    return [
+        AlmacenResponse(codigo=a.almacen, descripcion=a.descripcion)
+        for a in almacenes
+    ]
 
 
 # Mapa de catálogos simples expuestos por el endpoint genérico.

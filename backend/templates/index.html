@@ -139,6 +139,16 @@
             <input id="calc-seguro" type="number" step="0.01" min="0" value="0"
                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
           </div>
+          <div>
+            <label class="mb-1 block text-sm font-medium text-slate-700">Otros Gastos (USD)</label>
+            <input id="calc-otros-gastos" type="number" step="0.01" min="0" value="0"
+                   class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm font-medium text-slate-700">Deducciones (USD)</label>
+            <input id="calc-deducciones" type="number" step="0.01" min="0" value="0"
+                   class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+          </div>
           <div class="sm:col-span-2 lg:col-span-3">
             <button type="submit"
                     class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-50">
@@ -212,6 +222,8 @@
                     <th class="px-3 py-2">FOB USD</th>
                     <th class="px-3 py-2">Flete USD</th>
                     <th class="px-3 py-2">Seguro USD</th>
+                    <th class="px-3 py-2">Otros Gastos USD</th>
+                    <th class="px-3 py-2">Deducciones USD</th>
                     <th class="px-3 py-2"></th>
                   </tr>
                 </thead>
@@ -220,10 +232,16 @@
             </div>
           </div>
 
-          <button type="submit"
-                  class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:opacity-50">
-            Guardar declaración
-          </button>
+          <div class="flex flex-wrap gap-3">
+            <button type="button" onclick="cargarDatosEjemplo()"
+                    class="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-200">
+              ⚡ Cargar Datos de Ejemplo
+            </button>
+            <button type="submit"
+                    class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:opacity-50">
+              Guardar declaración
+            </button>
+          </div>
         </form>
       </div>
 

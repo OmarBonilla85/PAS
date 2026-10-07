@@ -20,6 +20,7 @@ class ItemCalculoRequest(BaseModel):
     flete: float = Field(0.0, description="Flete en USD")
     seguro: float = Field(0.0, description="Seguro en USD")
     otros_gastos: float = Field(0.0, description="Otros gastos incrementables en USD")
+    deducciones: float = Field(0.0, description="Deducciones al valor CIF en USD")
     codigo_acuerdo: Optional[str] = Field(
         None, description="Código de acuerdo preferencial (ej. 'CAFTA', 'TLC_MEX')"
     )

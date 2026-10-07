@@ -81,7 +81,8 @@ def crear_declaracion(payload: DeclaracionCreate, db: Session = Depends(get_db))
                     valor_fob=item.valor_fob_usd,
                     flete=item.flete_usd,
                     seguro=item.seguro_usd,
-                    otros_gastos=0.0,
+                    otros_gastos=item.otros_gastos_usd,
+                    deducciones=item.deducciones_usd,
                 )
                 for item in payload.items
             ],

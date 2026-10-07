@@ -1,0 +1,17 @@
+OBJETIVO: Configurar el remoto de GitHub y realizar el push inicial de la rama principal.
+
+REQUISITOS TÉCNICOS:
+
+1. RENOMBRAR RAMA A MAIN:
+   - Asegurar que la rama principal se llame 'main':
+     git branch -M main
+
+2. VINCULAR REMOTO:
+   - Configurar la URL del repositorio de GitHub:
+     git remote add origin https://github.com/OmarBonilla85/PAS.git
+
+3. SUBIR CÓDIGO (PUSH):
+   - Ejecutar 'git push -u origin main' para enviar todos los commits iniciales a GitHub.
+
+4. VALIDACIÓN:
+   - Ejecutar 'git remote -v' y verificar confirmación de subida exitosa.

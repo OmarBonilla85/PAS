@@ -26,6 +26,8 @@ class DeclaracionItemCreate(BaseModel):
     valor_fob_usd: float = Field(..., ge=0, description="Valor FOB en USD")
     flete_usd: float = Field(0.0, ge=0, description="Flete en USD")
     seguro_usd: float = Field(0.0, ge=0, description="Seguro en USD")
+    otros_gastos_usd: float = Field(0.0, ge=0, description="Otros gastos incrementables en USD")
+    deducciones_usd: float = Field(0.0, ge=0, description="Deducciones al valor CIF en USD")
 
 
 class DeclaracionCreate(BaseModel):

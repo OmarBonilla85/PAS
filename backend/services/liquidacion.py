@@ -2,6 +2,7 @@
 
 Implementa la cascada impositiva aduanera de Nicaragua sobre el valor CIF:
 
+    CIF_USD = FOB + Flete + Seguro + otros_gastos - deducciones
     CIF_NIO = CIF_USD * tasa_cambio
     DAI_NIO = CIF_NIO * (DAI% / 100)
     ISC_NIO = (CIF_NIO + DAI_NIO) * (ISC% / 100)
@@ -148,6 +149,7 @@ def _calcular_item(
         + Decimal(str(item.flete))
         + Decimal(str(item.seguro))
         + Decimal(str(item.otros_gastos))
+        - Decimal(str(item.deducciones))
     )
     cif_nio = cif_usd * tasa
 
