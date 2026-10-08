@@ -1,0 +1,20 @@
+OBJETIVO: Mostrar la desglose dual en Córdobas (NIO) y Dólares (USD) para TODOS los impuestos (DAI, ISC, IVA, RIR) en la Calculadora Tributaria y la DUCA.
+
+REQUISITOS TÉCNICOS:
+
+1. ESQUEMA Y SERVICIO DE LIQUIDACIÓN ('backend/schemas/liquidacion.py' y 'backend/services/liquidacion.py'):
+   - Asegurar que 'LiquidacionTotalResponse' incluya los totales consolidados en USD para cada impuesto:
+     * total_dai_usd
+     * total_isc_usd
+     * total_iva_usd
+     * total_rir_usd
+
+2. DUALIDAD DE MONEDAS EN FRONTEND ('backend/static/js/app.js' y 'backend/templates/index.html'):
+   - Modificar las tarjetas de renderizado de impuestos (DAI, ISC, IVA, RIR) en la sección "DESGLOSE POR ÍTEM" y "TOTALES CONSOLIDADOS".
+   - Cada caja de impuesto debe mostrar de forma clara ambos montos:
+     * Monto en Córdobas (NIO), ej: C$ 21,343.25
+     * Monto equivalente en Dólares (USD), ej: $582.76 USD
+   - Aplicar el mismo formato dual para las tablas e ítems del módulo DUCA.
+
+3. VERIFICACIÓN:
+   - Ejecutar 'python3 -m backend.test_liquidacion' y 'python3 -m backend.test_frontend' para confirmar que los datos se propagan y visualizan correctamente.

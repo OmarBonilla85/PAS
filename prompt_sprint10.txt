@@ -1,0 +1,17 @@
+OBJETIVO: Sincronizar el Sprint 9 en Git/GitHub e incorporar la previsualización tributaria (CIF y Tributos NIO/USD) por ítem en el formulario de la DUCA.
+
+REQUISITOS TÉCNICOS:
+
+1. CONTROL DE VERSIONES (GIT):
+   - Crear commit con los cambios del Sprint 9: "feat(ui): despliegue dual de tributos en NIO y USD para la calculadora y el historial DUCA"
+   - Ejecutar 'git push origin main' para actualizar el repositorio en GitHub.
+
+2. PREVISUALIZACIÓN DE TRIBUTOS EN TABLA DE ÍTEMS DUCA ('backend/static/js/app.js' y 'backend/templates/index.html'):
+   - En la tabla de la sección "ÍTEMS DE LA DECLARACIÓN" dentro de la pestaña DUCA:
+     * Añadir columnas visuales: "CIF (USD / NIO)" y "Tributos Est. (NIO / USD)".
+     * Cuando el usuario ingrese o modifique Partida, FOB, Flete, Seguro u Otros Gastos en una fila de ítem, invocar en segundo plano el motor de cálculo '/api/v1/liquidacion/calcular'.
+     * Renderizar inmediatamente en esa misma fila el CIF resultante y el Total de Tributos estimado en formato dual (C$ NIO / $ USD).
+   - Calcular y mostrar una fila de "SUBTOTAL DECLARACIÓN" al pie de la tabla de ítems con la suma consolidada de CIF y Tributos estimados.
+
+3. VERIFICACIÓN Y PRUEBAS:
+   - Ejecutar 'python3 -m backend.run_all_tests' para confirmar que todos los servicios y pantallas siguen pasando correctamente.

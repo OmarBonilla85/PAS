@@ -421,6 +421,7 @@ function inicializarDUCA() {
     await guardarDeclaracion();
   });
   $("#duca-regimen").addEventListener("change", poblarSubregimenes);
+  $("#duca-tasa").addEventListener("input", debounce(recalcularTodo, 400));
   cargarCatalogosDUCA();
   cargarHistorial();
 }
@@ -520,6 +521,12 @@ function crearFilaItem(numero = 1) {
       <input type="number" class="item-deducciones w-28 rounded-lg border border-slate-300 px-2 py-1.5 text-sm" min="0" step="0.01" value="0" />
     </td>
     <td class="px-3 py-2 text-right">
+      <div class="item-cif font-mono text-xs text-slate-700">—</div>
+    </td>
+    <td class="px-3 py-2 text-right">
+      <div class="item-tributos font-mono text-xs font-semibold text-slate-700">—</div>
+    </td>
+    <td class="px-3 py-2 text-right">
       <button type="button" class="eliminar-item rounded-lg px-2 py-1 text-slate-400 hover:bg-red-50 hover:text-red-600" title="Eliminar ítem">✕</button>
     </td>`;
   return fila;
@@ -539,9 +546,133 @@ function agregarItem() {
   fila.querySelector(".eliminar-item").addEventListener("click", () => {
     fila.remove();
     renumerarItems();
+    actualizarSubtotales();
   });
+  conectarCalculoItem(fila);
   cuerpo.appendChild(fila);
   return fila;
+}
+
+function leerItemFila(fila) {
+  return {
+    partida: (fila.querySelector(".item-partida")?.value || "").trim(),
+    fob: Number(fila.querySelector(".item-fob")?.value || 0),
+    flete: Number(fila.querySelector(".item-flete")?.value || 0),
+    seguro: Number(fila.querySelector(".item-seguro")?.value || 0),
+    otrosGastos: Number(fila.querySelector(".item-otros-gastos")?.value || 0),
+    deducciones: Number(fila.querySelector(".item-deducciones")?.value || 0),
+  };
+}
+
+function conectarCalculoItem(fila) {
+  const recalcular = debounce(() => calcularPrevisualizacionFila(fila), 400);
+  [
+    ".item-partida",
+    ".item-fob",
+    ".item-flete",
+    ".item-seguro",
+    ".item-otros-gastos",
+    ".item-deducciones",
+  ].forEach((selector) => {
+    const input = fila.querySelector(selector);
+    if (input) input.addEventListener("input", recalcular);
+  });
+}
+
+async function calcularPrevisualizacionFila(fila) {
+  const cifCelda = fila.querySelector(".item-cif");
+  const tribCelda = fila.querySelector(".item-tributos");
+  const datos = leerItemFila(fila);
+  const tasa = Number($("#duca-tasa")?.value || 0);
+
+  const limpiar = () => {
+    fila.dataset.cifUsd = "";
+    fila.dataset.cifNio = "";
+    fila.dataset.tributosNio = "";
+    fila.dataset.tributosUsd = "";
+    if (cifCelda) cifCelda.textContent = "—";
+    if (tribCelda) tribCelda.textContent = "—";
+  };
+
+  if (!datos.partida || !(tasa > 0)) {
+    limpiar();
+    actualizarSubtotales();
+    return;
+  }
+
+  if (cifCelda) cifCelda.textContent = "Calculando…";
+  if (tribCelda) tribCelda.textContent = "Calculando…";
+  try {
+    const respuesta = await apiFetch("/api/v1/liquidacion/calcular", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tasa_cambio: tasa,
+        items: [
+          {
+            partida_arancelaria: datos.partida,
+            valor_fob: datos.fob,
+            flete: datos.flete,
+            seguro: datos.seguro,
+            otros_gastos: datos.otrosGastos,
+            deducciones: datos.deducciones,
+          },
+        ],
+      }),
+    });
+    const item = (respuesta.items || [])[0];
+    if (!item) {
+      limpiar();
+      actualizarSubtotales();
+      return;
+    }
+    fila.dataset.cifUsd = String(item.cif_usd);
+    fila.dataset.cifNio = String(item.cif_nio);
+    fila.dataset.tributosNio = String(item.total_tributos_nio);
+    fila.dataset.tributosUsd = String(item.total_tributos_usd);
+    if (cifCelda) {
+      cifCelda.textContent = `${monedaUsd(item.cif_usd)} / ${monedaNio(item.cif_nio)}`;
+    }
+    if (tribCelda) {
+      tribCelda.textContent = `${monedaNio(item.total_tributos_nio)} / ${monedaUsd(item.total_tributos_usd)}`;
+    }
+  } catch (err) {
+    limpiar();
+  } finally {
+    actualizarSubtotales();
+  }
+}
+
+function recalcularTodo() {
+  document.querySelectorAll("#duca-items tr").forEach((fila) => {
+    calcularPrevisualizacionFila(fila);
+  });
+}
+
+function actualizarSubtotales() {
+  const cifEl = $("#duca-subtotal-cif");
+  const tribEl = $("#duca-subtotal-tributos");
+  let cifUsd = 0;
+  let cifNio = 0;
+  let tribNio = 0;
+  let tribUsd = 0;
+  let hayDatos = false;
+
+  document.querySelectorAll("#duca-items tr").forEach((fila) => {
+    if (fila.dataset.cifUsd === "") return;
+    hayDatos = true;
+    cifUsd += Number(fila.dataset.cifUsd) || 0;
+    cifNio += Number(fila.dataset.cifNio) || 0;
+    tribNio += Number(fila.dataset.tributosNio) || 0;
+    tribUsd += Number(fila.dataset.tributosUsd) || 0;
+  });
+
+  if (cifEl) {
+    cifEl.textContent = hayDatos ? `${monedaUsd(cifUsd)} / ${monedaNio(cifNio)}` : "—";
+  }
+  if (tribEl) {
+    tribEl.textContent = hayDatos ? `${monedaNio(tribNio)} / ${monedaUsd(tribUsd)}` : "—";
+  }
 }
 
 function cargarDatosEjemplo() {
@@ -564,6 +695,7 @@ function cargarDatosEjemplo() {
   fila.querySelector(".item-otros-gastos").value = "0";
   fila.querySelector(".item-deducciones").value = "0";
 
+  calcularPrevisualizacionFila(fila);
   toast("Datos de ejemplo cargados");
 }
 
@@ -638,6 +770,7 @@ async function guardarDeclaracion() {
     $("#duca-tasa").value = "36.6243";
     $("#duca-items").innerHTML = "";
     agregarItem();
+    actualizarSubtotales();
     cargarHistorial();
   } catch (err) {
     toast(err.message, false);
